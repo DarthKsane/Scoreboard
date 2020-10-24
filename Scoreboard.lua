@@ -191,15 +191,23 @@ do
     updateText()
   end
 
+  function addon:getDB(key)
+    return addon.db[key]
+  end
+
   function addon:setCurrency(ilink, value)
     local nk = getCurrencyKeyID(ilink)
-    addon.db.currencies[nk] = value
+    --addon.db.currencies[nk] = value
+    local cur = addon:getDB("currencies")
+    cur[nk] = value
+    addon:setDB("currencies", cur)
     updateText()
   end
 
   function addon:getCurrency(ilink)
     local nk = getCurrencyKeyID(ilink)
-    return addon.db.currencies[nk] == true
+    local cur = addon:getDB("currencies")
+    return cur[nk] == true
   end
 
   f:RegisterEvent("PLAYER_ENTERING_WORLD");

@@ -13,9 +13,12 @@ local function build()
         name = L['Show minimap button'],
         desc = L['Show the Scoreboard minimap button'],
         order = 0,
-        get = function(info) return not addon.db.minimap.hide end,
+        get = function(info) 
+          local config = addon:getDB("minimap")
+          return not config.hide 
+        end,
         set = function(info, value)
-          local config = addon.db.minimap
+          local config = addon:getDB("minimap")
           config.hide = not value
           addon:setDB("minimap", config)
           ldbi:Refresh(addonName)
@@ -24,7 +27,7 @@ local function build()
       showHKs = {
         type = 'toggle',
         order = 1,
-        get = function(info) return addon.db[info[#info]] end,
+        get = function(info) return addon:getDB(info[#info]) end,
         set = function(info, value) return addon:setDB(info[#info], value) end,
         name = L.showHKs,
         desc = L.showHKsDescription,
@@ -34,7 +37,7 @@ local function build()
         order = 2,
         name = L.showIcons,
         desc = L.showIconsDescription,
-        get = function(info) return addon.db[info[#info]] end,
+        get = function(info) return addon:getDB(info[#info]) end,
         set = function(info, value) return addon:setDB(info[#info], value) end,
       },
       showLabels = {
@@ -42,7 +45,7 @@ local function build()
         order = 3,
         name = L.showLabels,
         desc = L.showLabelsDescription,
-        get = function(info) return addon.db[info[#info]] end,
+        get = function(info) return addon:getDB(info[#info]) end,
         set = function(info, value) return addon:setDB(info[#info], value) end,
       },
       showLimits = {
@@ -50,7 +53,7 @@ local function build()
         order = 4,
         name = L.showLimits,
         desc = L.showLimitsDescription,
-        get = function(info) return addon.db[info[#info]] end,
+        get = function(info) return addon:getDB(info[#info]) end,
         set = function(info, value) return addon:setDB(info[#info], value) end,
       },
       useShortLabels = {
@@ -58,7 +61,7 @@ local function build()
         order = 5,
         name = L.useShortLabels,
         desc = L.useShortLabelsDescription,
-        get = function(info) return addon.db[info[#info]] end,
+        get = function(info) return addon:getDB(info[#info]) end,
         set = function(info, value) return addon:setDB(info[#info], value) end,
       },
       showHeaders = {
@@ -66,7 +69,7 @@ local function build()
         order = 7,
         name = L.showHeaders,
         desc = L.showHeadersDescription,
-        get = function(info) return addon.db[info[#info]] end,
+        get = function(info) return addon:getDB(info[#info]) end,
         set = function(info, value) return addon:setDB(info[#info], value) end,
       },
       disableUsageText = {
@@ -74,7 +77,7 @@ local function build()
         order = 8,
         name = L.disableUsageText,
         desc = L.disableUsageTextDescription,
-        get = function(info) return addon.db[info[#info]] end,
+        get = function(info) return addon:getDB(info[#info]) end,
         set = function(info, value) return addon:setDB(info[#info], value) end,
       },
       currencies = {
